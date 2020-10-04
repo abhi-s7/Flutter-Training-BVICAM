@@ -16,11 +16,17 @@ void main(){
     int sum = 0;
     ordersMap.forEach((k, v) { //another method to loop through the Map
       //v contains list of products therefore take it and sort it
-      v.sort((a,b) => a - b);
+      // v.sort((a,b) => a - b);//since it is a map inside the list therefore this won't work
+      //v.sort((a,b) => a.price.compareTo(b.price));//this won't work either
+      v.sort((a,b) => a['prod_price'].compareTo(b['prod_price']));
       stdout.write('Order ID: $k & Product List: $v');
 
-      sum +=  //this gives collective sum of all the order id
-       v.fold(0, (previousValue, current)=> current);// this will give the sum of all the elements present in list of one order it
+      v.forEach((ele) {
+        //print('Ele is $ele');//ele is a hashmap
+        sum += ele['prod_price'];
+      });
+      // sum +=  //this gives collective sum of all the order id
+      //  v.fold(0, (previousValue, current)=> current);// this will give the sum of all the elements present in list of one order it
 
       print('');
 
@@ -41,20 +47,19 @@ Map addingInMapHardcoded(){
       {"Google Mountain View", "Cupertino"}//office address
     ],//list of addresses
 
-    {101: [  19000, 1000, 599, 56000]
-      /*
+    {101: [
+      
       {"prod_name" : "Mobile", "prod_price" : 1000},
             {"prod_name" : "TV", "prod_price" : 19000},
             {"prod_name" : "Laptop", "prod_price" : 45000},
             {"prod_name" : "Cakes", "prod_price" : 500}
             //it is not object rather a Map = _InternalLinkedHashMap<String, Object>
-            //every {} is a Map so sorting function of list won't work on it
-            //therefore store only list of prices of products
             //if we want to display all the product information then we should create custom object and then run compareTo() to sort the list
           ]
-          */
     , 
-    102: [ 7000, 100, 200]
+    102: [ {"prod_name" : "Jeans", "prod_price" : 7000},
+             {"prod_name" : "Stationary", "prod_price" : 100}
+           ]
     }//Map of orders
     ]);
 
@@ -64,8 +69,14 @@ Map addingInMapHardcoded(){
       {"G618", "Dwarka"},//res address
       {"Banglore", "Chandigarh"}//office address
     ],//list of addresses
-    {
-    12: [2999,50000]
+    {10: [ {"prod_name" : "Bags", "prod_price" : 29122},
+            {"prod_name" : "Shushi", "prod_price" : 1100}
+          ]
+    , 
+    12: [ {"prod_name" : "Jeans", "prod_price" : 7000},
+           {"prod_name" : "TV", "prod_price" : 23432},
+           {"prod_name" : "Bag", "prod_price" : 12330}
+           ]
     }//Map of orders
     ]);
 
@@ -75,9 +86,14 @@ Map addingInMapHardcoded(){
       {"Hno 221"},//res address
       {"Sona road Gurugram", "Banglore", "Noida"}//office address
     ],//list of addresses
-    {
-      1011: [ 2000,3500,20000,3000,3000]//list of product prices
-    
+   {1011: [ {"prod_name" : "Samsung Smartphone", "prod_price" : 1000},
+            {"prod_name" : "Bravia TV", "prod_price" : 1100},
+            {"prod_name" : "Mac book", "prod_price" : 45000},
+          ]
+    , 
+    1022: [ {"prod_name" : "Groceries", "prod_price" : 1000},
+             {"prod_name" : "Stationary", "prod_price" : 700}
+           ]
     }//Map of orders
     ]);
 
@@ -87,10 +103,13 @@ Map addingInMapHardcoded(){
       {"Sector 7", "Rohini Delhi"},//res address
       {"Chandigarh", "Noida"}//office address
     ],//list of addresses
-    {2001: [ 50000,2999
+     {2001: [ {"prod_name" : "Apple iPhone", "prod_price" : 60000},
+            {"prod_name" : "Phone Cover", "prod_price" : 999},
           ]
     , 
-    2002: [ 1000, 2000, 599
+    2002: [ {"prod_name" : "Thermos", "prod_price" : 850},
+             {"prod_name" : "Piano", "prod_price" : 70000},
+             {"prod_name" : "Ice cream", "prod_price" : 600}
            ]
     }//Map of orders
     ]);
@@ -101,9 +120,15 @@ Map addingInMapHardcoded(){
       {"Sector 7", "Rohini Delhi"},//res address
       {"Chandigarh", "Noida"}//office address
     ],//list of addresses
-    {3001: [ 1000,800,333,1299 ]
+    {2001: [ 
+            {"prod_name" : "Bags", "prod_price" : 91000},
+            {"prod_name" : "Shoes", "prod_price" : 1199},
+            {"prod_name" : "Phone", "prod_price" : 60000},
+            {"prod_name" : "Chocolates", "prod_price" : 900}
+          ]
     , 
-    3002: [8400 ]
+    2002: [ {"prod_name" : "Tops", "prod_price" : 8950},
+           ]
     }//Map of orders
     ]);
     return customer;
